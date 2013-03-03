@@ -1,10 +1,26 @@
 #!/bin/bash
 #
-# Checks for and installs all requirements for
-# a LAMP server stack.
+# Installs, debugs, or removes a LAMP server stack.
+# Will also help configure the server.
 #
 # By John Shanahan
+# 2012
 #################################################
+#TODO
+# Change from apt-get to downloading source and making
+# everything manually, to make portable.
+#################################################
+#TODO
+# Change the end of Install from giving tips on how to
+# configure PHP, Apache, and MySQL to asking if 
+# they just want us to do it for them.
+#################################################
+#TODO
+# Figure out how to make install_debug_rm case 
+# insensitive. Looks redundant.
+#################################################
+
+
 
 #################################################
 # Header/name
