@@ -33,17 +33,16 @@ printf "(D)ebugging a current installation.\n"
 printf "(R)emoving a current LAMP installation.\n"
 printf "(Q)uit.\n"
 printf "> "
-	read xyz
+	read install_debug_rm
 
 #################################################
 # Installing LAMP server stack
 #################################################
-if [[ ( "$xyz" = i ) || ( "$xyz" = I ) ]]
+if [[ ( "$install_debug_rm" = i ) || ( "$install_debug_rm" = I ) ]]
 then
 	# Update and Upgrade
 	printf "\nUpdating ...\n"
-	printf "Will do this again after everything has finished ...\n"
-	#apt-get -qqqq update
+	apt-get -qqq update
 
 	##############################
 	#  Install required packages #
@@ -86,7 +85,7 @@ fi
 #################################################
 # Debugging options
 #################################################
-if [[ ( "$xyz" = d ) || ( "$xyz" = D ) ]]
+if [[ ( "$install_debug_rm" = d ) || ( "$install_debug_rm" = D ) ]]
 then
 	printf "Debuggin ...\n"
 fi
@@ -95,7 +94,7 @@ fi
 #################################################
 # Removing LAMP stack
 #################################################
-if [[ ( "$xyz" = r ) || ( "$xyz" = R ) ]]
+if [[ ( "$install_debug_rm" = r ) || ( "$install_debug_rm" = R ) ]]
 then
 	printf "Removing LAMP ...\n"
 	
@@ -105,7 +104,7 @@ then
 	exit 10
 fi
 
-if [[ ( "$xyz" = q ) || ( "$xyz" = Q ) ]]
+if [[ ( "$install_debug_rm" = q ) || ( "$install_debug_rm" = Q ) ]]
 then
 	printf "Quitting ...\n"
 	exit 0
