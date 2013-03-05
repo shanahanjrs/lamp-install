@@ -15,11 +15,6 @@
 # configure PHP, Apache, and MySQL to asking if 
 # they just want us to do it for them.
 #################################################
-#TODO
-# Figure out how to make install_debug_rm case 
-# insensitive. Looks redundant.
-#################################################
-
 
 
 #################################################
@@ -28,6 +23,11 @@
 printf "\n####################\n"
 printf "#  Lamp-install.sh #\n# By John Shanahan #\n"
 printf "####################\n\n"
+
+######################
+#  Set no casematch  #
+######################
+shopt -s nocasematch
 
 #################################################
 # Requires run as root (or sudo)
@@ -54,7 +54,7 @@ printf "> "
 #################################################
 # Installing LAMP server stack
 #################################################
-if [[ ( "$install_debug_rm" = i ) || ( "$install_debug_rm" = I ) ]]
+if [[ ( "$install_debug_rm" = i ) ]]
 then
 	# Update and Upgrade
 	printf "\nUpdating ...\n"
@@ -74,7 +74,7 @@ then
 	printf "> "
 	read serv_local
 
-	if [[ ( "$serv_local" = y ) || ( "$serv_local" = Y ) ]]
+	if [[ ( "$serv_local" = y ) ]]
 	then
 		echo "ServerName localhost" >> /etc/apache2/conf.d/fqdn
 	else
@@ -96,38 +96,43 @@ then
 	printf "your /etc/mysql/my.cnf to your IP address.\n\n"
 	printf "To get PHP to work with MySQL you need to uncomment the\n"
 	printf "line in /etc/php5/apache2/php.ini that says ';extension=mysql.so'\n\n"
+
+	# Unset casematch
+	shopt -u nocasematch
+	exit 0
 fi
 
 #################################################
 # Debugging options
 #################################################
-if [[ ( "$install_debug_rm" = d ) || ( "$install_debug_rm" = D ) ]]
+if [[ ( "$install_debug_rm" = d ) ]]
 then
-	printf "Debuggin ...\n"
+	printf "Debugging ...\n"
+	# Unset casematch
+	shopt -u nocasematch
+	exit 0
 fi
 
 
 #################################################
 # Removing LAMP stack
 #################################################
-if [[ ( "$install_debug_rm" = r ) || ( "$install_debug_rm" = R ) ]]
+if [[ ( "$install_debug_rm" = r ) ]]
 then
 	printf "Removing LAMP ...\n"
 	
 	apt-get purge -qqq apache2 php5 libapache2-mod-php5 mysql-server php5-mysql libapace2-mod-auth-mysql phpmyadmin
 
 	printf "LAMP stack removed ...\n"
-	exit 10
-fi
-
-if [[ ( "$install_debug_rm" = q ) || ( "$install_debug_rm" = Q ) ]]
-then
-	printf "Quitting ...\n"
+	# Unset casematch
+	shopt -u nocasematch
 	exit 0
 fi
 
-
-
-
-
-
+if [[ ( "$install_debug_rm" = q ) ]]
+then
+	printf "Quitting ...\n"
+	# Unset casematch
+	shopt -u nocasematch
+	exit 0
+fi
