@@ -9,7 +9,9 @@ Future implementations will download and compile everything
 from source making it portable.
 
 To use just run
+```shell
 $ sudo ./lamp-install
+```
 
 Can currently install and remove an installation.
 The options to remove and debug/configure have not yet
